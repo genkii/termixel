@@ -1,0 +1,27 @@
+[package]
+name = "termixel"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.6.6", default-features = false, features = ["derive", "std"] }
+crossterm = { version = "0.29.0", default-features = false }
+directories = "6.0.0"
+image = { version = "0.25.10", default-features = false, features = ["png"] }
+
+[profile.release]
+
+# Strip symbols from the binary
+strip = true
+
+# Optimize for size
+opt-level = "z"
+
+# Enable link-time optimization
+lto = "fat"
+
+# Reduce codegen units to minimize binary size and improve performance
+codegen-units = 1
+
+# Abort on panic to minimize binary size
+panic = "abort"
