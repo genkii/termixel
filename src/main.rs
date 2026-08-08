@@ -1,8 +1,7 @@
-mod config_path;
-mod render_sprite;
-
 use clap::Parser;
 use clap::Subcommand;
+use termixel::config_path;
+use termixel::render_sprite;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]

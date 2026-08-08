@@ -3,6 +3,13 @@ name = "termixel"
 version = "0.1.0"
 edition = "2024"
 
+[dev-dependencies]
+criterion = { version = "0.8.2" }
+
+[[bench]]
+name = "sprite_rendering"
+harness = false
+
 [dependencies]
 clap = { version = "4.6.6", default-features = false, features = ["derive", "std"] }
 crossterm = { version = "0.29.0", default-features = false }
