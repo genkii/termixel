@@ -4,6 +4,7 @@ use image::GenericImageView;
 use std::io::{Write, stdout};
 use std::path::PathBuf;
 
+/// Renders the sprite provided by the user into the terminal using unicode characters.
 pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
     let image = image::open(path)?;
 
@@ -12,6 +13,9 @@ pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
 
     let mut stdout = stdout();
 
+    // Iterate over the pixels in the image, printing unicode characters to the terminal
+    // Each pixel is a whole line on the x axis and a half line on the y axis
+    // That means two pixels fit vertically into a single line
     for pixel_y in (0..height).step_by(2) {
         for pixel_x in 0..width {
             let pixel = image.get_pixel(pixel_x, pixel_y);
@@ -20,6 +24,7 @@ pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
             let top_alpha = pixel[3];
             let bottom_alpha = pixel2[3];
 
+            // Both pixels are not transparent, so print a block character
             if top_alpha > 0 && bottom_alpha > 0 {
                 let color_top = Color::Rgb {
                     r: pixel[0],
@@ -38,7 +43,9 @@ pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
                     SetBackgroundColor(color_bottom),
                     Print("▀")
                 )?;
-            } else if top_alpha == 0 && bottom_alpha > 0 {
+            }
+            // Top pixel is transparent, bottom pixel is not, so print a half block character
+            else if top_alpha == 0 && bottom_alpha > 0 {
                 let color_bottom = Color::Rgb {
                     r: pixel2[0],
                     g: pixel2[1],
@@ -51,7 +58,9 @@ pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
                     SetBackgroundColor(Color::Reset),
                     Print("▄")
                 )?;
-            } else if top_alpha > 0 && bottom_alpha == 0 {
+            }
+            // Top pixel is not transparent, bottom pixel is transparent, so print a half block character
+            else if top_alpha > 0 && bottom_alpha == 0 {
                 let color_top = Color::Rgb {
                     r: pixel[0],
                     g: pixel[1],
@@ -64,7 +73,9 @@ pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
                     SetBackgroundColor(Color::Reset),
                     Print("▀")
                 )?;
-            } else {
+            }
+            // Both pixels are transparent, so print a space character
+            else {
                 execute!(
                     stdout,
                     SetBackgroundColor(Color::Reset),
@@ -72,13 +83,9 @@ pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
                     Print(" ")
                 )?;
             }
-
-            // If top is transparent then print ▄ with the color and backgroud color to reset
-            // If bottom pixel is transparent then print ▀ with color and background color to reset
-            // If both are transparent then print " " with the color and background color to reset
-            // If both pixels are visible then print ▀ with top color foreground color and bottom color background color
         }
 
+        // Print a newline character to move to the next line
         execute!(stdout, Print("\n"))?;
     }
 
