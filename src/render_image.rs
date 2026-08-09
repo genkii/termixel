@@ -59,6 +59,7 @@ pub fn render_image(image: &RgbaImage) -> Result<(), Box<dyn std::error::Error>>
         output.push('\n');
     }
 
+    output.push_str("\x1b[0m");
     let mut stdout = stdout();
     stdout.write_all(output.as_bytes())?;
     stdout.flush()?;
