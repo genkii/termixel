@@ -1,29 +1,13 @@
-use clap::Parser;
-use clap::Subcommand;
 use termixel::config_path;
 use termixel::render_sprite;
 
-#[derive(Parser)]
-#[command(author, version, about, long_about = None)]
-struct Cli {
-    #[command(subcommand)]
-    command: Commands,
-}
-
-#[derive(Subcommand)]
-enum Commands {
-    Sprite { name: String },
-
-    List,
-}
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let cli = Cli::parse();
+    let mut args = std::env::args().skip(1);
 
-    match cli.command {
-        Commands::Sprite { name } => {
+    match args.next().as_deref() {
+        Some("sprite") => {
+            let name = args.next().ok_or("Missing sprite name")?;
             let config_path = config_path::config_dir().ok_or("Failed to find config dir")?;
-
             if !config_path.exists() {
                 println!("Creating config dir ...");
                 std::fs::create_dir_all(&config_path)?;
@@ -37,7 +21,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             render_sprite::render_sprite(&path)?;
         }
 
-        Commands::List => {
+        Some("list") => {
             let config_path = config_path::config_dir().ok_or("Failed to find config dir")?;
 
             if !config_path.exists() {
@@ -52,6 +36,33 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             for sprite in sprites {
                 println!("{}", sprite?.file_name().to_string_lossy());
             }
+        }
+
+        Some("help") | Some("-h") | Some("--help") | None => {
+            println!(
+                "
+                termixel - A terminal sprite renderer
+
+                COMMANDS:
+                    sprite <name>    Render a sprite
+                    list             List available sprites
+
+                OPTIONS:
+                    -h, --help       Print help
+                    -V, --version    Print version
+
+            "
+            )
+        }
+
+        Some("--version") | Some("-V") => {
+            println!("termixel {}", "v0.1.0");
+        }
+
+        Some(command) => {
+            eprintln!("Unknown command: {command}");
+            eprintln!("Run 'termixel --help' for usage.");
+            std::process::exit(2);
         }
     }
 

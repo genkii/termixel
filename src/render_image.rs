@@ -1,11 +1,12 @@
-use image::RgbaImage;
 use std::fmt::Write as FmtWrite;
 use std::io::{Write, stdout};
 
+use crate::rgba_image::RgbaImage;
+
 /// renders an image to the terminal using unicode characters
 pub fn render_image(image: &RgbaImage) -> Result<(), Box<dyn std::error::Error>> {
-    let height = image.height();
-    let width = image.width();
+    let height = image.height;
+    let width = image.width;
 
     let mut output = String::with_capacity((width * height * 20) as usize);
 
@@ -17,9 +18,9 @@ pub fn render_image(image: &RgbaImage) -> Result<(), Box<dyn std::error::Error>>
             let pixel = image.get_pixel(pixel_x, pixel_y);
 
             let pixel2 = if pixel_y + 1 < height {
-                *image.get_pixel(pixel_x, pixel_y + 1)
+                image.get_pixel(pixel_x, pixel_y + 1)
             } else {
-                image::Rgba([0, 0, 0, 0])
+                &[0, 0, 0, 0]
             };
 
             let top_alpha = pixel[3];
