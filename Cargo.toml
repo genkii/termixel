@@ -11,8 +11,7 @@ name = "sprite_rendering"
 harness = false
 
 [dependencies]
-clap = { version = "4.6.6", default-features = false, features = ["derive", "std"] }
-image = { version = "0.25.10", default-features = false, features = ["png"] }
+png = { version = "0.18.1", default-features = false }
 
 [profile.release]
 
