@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
 /// Returns the path to the configuration directory
-
 pub fn config_dir() -> Option<PathBuf> {
     #[cfg(target_os = "linux")]
     {

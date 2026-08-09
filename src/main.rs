@@ -27,14 +27,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if !config_path.exists() {
                 std::fs::create_dir_all(&config_path)?;
             }
-            let mut sprites = std::fs::read_dir(&config_path)?;
 
-            if sprites.next().is_none() {
-                println!("No sprites found");
-                return Ok(());
-            }
+            let sprites = std::fs::read_dir(&config_path)?;
+            let mut found = false;
+
             for sprite in sprites {
+                found = true;
                 println!("{}", sprite?.file_name().to_string_lossy());
+            }
+
+            if !found {
+                println!("No sprites found");
             }
         }
 
@@ -56,7 +59,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         Some("--version") | Some("-V") => {
-            println!("termixel {}", "v0.1.0");
+            println!("termixel v0.1.0");
         }
 
         Some(command) => {
