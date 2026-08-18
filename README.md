@@ -74,14 +74,7 @@ Termixel looks for `.png` files in its config directory.
 %APPDATA%\termixel\
 ```
 
-Just put your `.png` files in the folder. For example:
-
-```text
-termixel/
-├── creeper.png
-├── sword.png
-└── tree.png
-```
+Just put your `.png` files in the folder.
 
 ## CLI
 
