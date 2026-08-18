@@ -18,7 +18,7 @@ If you want to quickly install Termixel, you can use our installation script:
 curl -fsSL https://raw.githubusercontent.com/genkii/termixel/main/build.sh | bash
 ```
 
-The script downloads the latest Termixel binary and installs it to `~/.local/bin`.
+The script downloads the Termixel binary and installs it to `~/.local/bin`.
 
 After the installation, make sure `~/.local/bin` is in your `PATH`. If it isn't, add this to your shell configuration:
 
@@ -26,9 +26,21 @@ After the installation, make sure `~/.local/bin` is in your `PATH`. If it isn't,
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-You can also build Termixel yourself from source if you prefer.
+### Windows
+
+On Windows, you can use our PowerShell installation script:
+
+```powershell
+irm https://raw.githubusercontent.com/genkii/termixel/main/install.ps1 | iex
+```
+
+The script downloads the Termixel executable and installs it to your local application directory. It also adds Termixel to your user `PATH`.
+
+You can also view the [installation script](https://github.com/genkii/termixel/blob/main/install.ps1) on GitHub.
 
 ### From Source
+
+If you prefer, you can build Termixel yourself from source.
 
 Clone the repository and build it using Cargo:
 
@@ -38,14 +50,13 @@ cd termixel
 cargo build --release
 ```
 
-If you want a smaller binary you can also use the `build.sh` script to build the project.
+If you want a smaller binary, you can also use the `build.sh` script to build the project.
 
 The compiled binary will be located in:
 
 ```text
 target/release/termixel
 ```
-
 
 ## Setup
 
