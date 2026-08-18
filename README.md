@@ -15,7 +15,7 @@ If you want support for more file formats, feel free to fork the repo and implem
 If you want to quickly install Termixel, you can use our installation script:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/genkii/termixel/main/build.sh | bash
+curl -fsSL https://raw.githubusercontent.com/genkii/termixel/main/install.sh | bash
 ```
 
 The script downloads the Termixel binary and installs it to `~/.local/bin`.
