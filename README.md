@@ -8,6 +8,45 @@ If you want support for more file formats, feel free to fork the repo and implem
 
 > Termixel is designed for rendering pixel art and may not be suitable for bigger images.
 
+## Installation
+
+### Linux
+
+If you want to quickly install Termixel, you can use our installation script:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/genkii/termixel/main/build.sh | bash
+```
+
+The script downloads the latest Termixel binary and installs it to `~/.local/bin`.
+
+After the installation, make sure `~/.local/bin` is in your `PATH`. If it isn't, add this to your shell configuration:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+You can also build Termixel yourself from source if you prefer.
+
+### From Source
+
+Clone the repository and build it using Cargo:
+
+```bash
+git clone https://github.com/genkii/termixel.git
+cd termixel
+cargo build --release
+```
+
+If you want a smaller binary you can also use the `build.sh` script to build the project.
+
+The compiled binary will be located in:
+
+```text
+target/release/termixel
+```
+
+
 ## Setup
 
 Termixel looks for `.png` files in its config directory.
