@@ -1,5 +1,6 @@
-use termixel::config_path;
-use termixel::render_sprite;
+mod config_path;
+
+use termixel_core::unicode::render::render_sprite;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);

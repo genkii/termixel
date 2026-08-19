@@ -1,6 +1,6 @@
-use crate::{render_image::render_image, rgba_image::RgbaImage};
-
 use std::{io::BufReader, path::PathBuf};
+
+use crate::unicode::{render::render_image::render_image, rgba_image::RgbaImage};
 
 /// Renders the sprite provided by the user into the terminal
 pub fn render_sprite(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {

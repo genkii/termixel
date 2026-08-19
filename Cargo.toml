@@ -6,12 +6,16 @@ edition = "2024"
 [dev-dependencies]
 criterion = { version = "0.8.2" }
 
+[workspace]
+members = ["crates/termixel-core"]
+
 [[bench]]
 name = "sprite_rendering"
 harness = false
 
 [dependencies]
 png = { version = "0.18.1", default-features = false }
+termixel-core = { path = "crates/termixel-core"}
 
 [profile.release]
 

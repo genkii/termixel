@@ -1,0 +1,13 @@
+[package]
+name = "termixel-core"
+version = "0.1.0"
+edition = "2024"
+description = "A fast terminal renderer for images"
+license = "MIT"
+readme = "README.md"
+keywords = ["terminal", "renderer", "image"]
+categories = ["command-line-utilities", "graphics"]
+repository = "https://github.com/genkii/termixel"
+
+[dependencies]
+png = "0.18.1"

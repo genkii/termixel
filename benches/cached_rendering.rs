@@ -1,13 +1,17 @@
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
-use termixel_core::unicode::{render::render_image::render_image, rgba_image::RgbaImage};
+use termixel_core::unicode::{
+    cached_image::CachedImage, render::render_cached::render_cached, rgba_image::RgbaImage,
+};
 
 fn benchmark_sprite(c: &mut Criterion) {
     let image = RgbaImage::from_pixel(16, 16, [255, 0, 0, 255]);
 
+    let cached = CachedImage::new(&image).unwrap();
+
     c.bench_function("render 16x16 sprite", |b| {
         b.iter(|| {
-            render_image(black_box(&image)).unwrap();
+            render_cached(black_box(&cached)).unwrap();
         });
     });
 }

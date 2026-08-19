@@ -1,7 +1,7 @@
 use std::fmt::Write as FmtWrite;
 use std::io::{Write, stdout};
 
-use crate::rgba_image::RgbaImage;
+use crate::unicode::rgba_image::RgbaImage;
 
 /// renders an image to the terminal using unicode characters
 pub fn render_image(image: &RgbaImage) -> Result<(), Box<dyn std::error::Error>> {
