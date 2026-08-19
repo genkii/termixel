@@ -89,6 +89,12 @@ Renders a sprite in the terminal.
 
 The name is the filename without `.png`.
 
+## Using The Crate
+
+Termixel uses the inbuild termixel-core crate you can check it out on crates.io
+
+https://crates.io/crates/termixel-core
+
 ## Supported Formats
 
 Currently, only `.png` is supported.
